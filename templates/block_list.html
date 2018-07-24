@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<div class="row">
+    <div class="col-xs-12 col-md-10">
+    
+        {% for item in block_info %}
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <a href="/article/list/{{item.id}}">{{item.title}}</a>
+            <span class="pull-right">{{item.manager}}</span>
+          </div>
+          <div class="panel-body">
+            {{item.desc}}
+          </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="col-xs-12 col-md-2">
+        <div class="well">
+          {% if user.is_authenticated %}
+            <span>{{ user.username }}.</span>
+            <br />欢迎来到论坛.<br />
+            <a href="{% url 'logout_then_login' %}">登出</a>
+            <br />
+          {% else %}
+            <p>匿名用户. 请<a href="{% url 'login' %}">登录</a>.</p>
+          {% endif %}
+        </div>
+    </div>
+</div>
+    <div class="container">
+{% endblock %}
